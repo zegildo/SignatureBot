@@ -16,6 +16,7 @@ def get_telefone(DDD, tel):
 	return telefone_completo
 
 def get_email(login):
+	login = login.lower()
 	email = login+'@cade.gov.br'
 	return email
 
@@ -31,22 +32,22 @@ def create_personal_information(kwargs):
 	telefone = get_telefone(kwargs['DDD'], kwargs['TELEFONE'])
 	email = get_email(kwargs['LOGIN'])
 
-	img = Image.new('RGB', (200, 100), color = (255, 255, 255))
-	fnt_nome = ImageFont.truetype('fonts/Effra_Std_Rg.ttf', 17)
-	fnt_inf = ImageFont.truetype('fonts/roboto/Roboto-Regular.ttf', 12)
+	img = Image.new('RGB', (1800, 500), color = (255, 255, 255))
+	fnt_nome = ImageFont.truetype('fonts/Effra_Std_Rg.ttf', 150)
+	fnt_inf = ImageFont.truetype('fonts/roboto/Roboto-Regular.ttf', 80)
 
 	d = ImageDraw.Draw(img)
 	
 	d.text((10,10), nome_e_titulo, font=fnt_nome, fill=(0, 102, 51))
-	d.text((10,33), cargo, font=fnt_inf, fill=(36, 62, 106))
-	d.text((10,53), telefone, font=fnt_inf, fill=(36, 62, 106))
-	d.text((10,73), email, font=fnt_inf, fill=(36, 62, 106))
+	d.text((10,170), cargo, font=fnt_inf, fill=(36, 62, 106))
+	d.text((10,270), telefone, font=fnt_inf, fill=(36, 62, 106))
+	d.text((10,370), email, font=fnt_inf, fill=(36, 62, 106))
 	return img
 
 def create_logo():
 	'''
 	'''
-	logo = Image.open("logos/cade/cade.jpg")
+	logo = Image.open("logos/cade/cade-1300-415.png")
 	return logo
 
 def get_file_name(nome):
@@ -68,9 +69,9 @@ def create(kwargs):
 	img_personal_data = create_personal_information(kwargs)
 	nome_file = get_file_name(kwargs['NOME'])
 
-	new_im = Image.new('RGB', (350,110), "white")
-	new_im.paste(logo,(10, 10))
-	new_im.paste(img_personal_data,(160, 0))
+	new_im = Image.new('RGB', (3100,500), "white")
+	new_im.paste(logo,(30, 60))
+	new_im.paste(img_personal_data,(1350, 0))
 
 	memory = BytesIO()
 	memory.name = nome_file
