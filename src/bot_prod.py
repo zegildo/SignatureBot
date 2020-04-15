@@ -11,6 +11,10 @@ from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters,
 from conf.settings import (HEROKU_APP_NAME, TELEGRAM_TOKEN, PASSWORD)
 import signature_builder as sb
 
+logging.basicConfig(level=logging.INFO,
+                    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+logger = logging.getLogger()
+
 MSG_START="Olá! Eu sou um construtor de assinaturas de e-mails.\nA qual órgão você pertence?"
 MSG_ORGAO="*ATENÇÃO\!* \nEste serviço é de uso exclusivo de servidores\. DIGITE A SENHA DE UTILIZAÇÃO PARA CONTINUAR:"
 MSG_SENHA="*Seja Bem\-Vindo\!* \nA partir de agora vamos gerar sua assinatura de e\-mail personalizada\. \nDigite por favor o seu NOME e SOBRENOME:"
@@ -20,10 +24,6 @@ MSG_CARGO="Qual o seu cargo?"
 MSG_DDD="Qual o seu DDD?"
 MSG_TEL="Qual o seu telefone? Ex: 95683 3245"
 MSG_LOG="Qual o seu login de e\-mail? \n Ex: Se o seu e\-mail for: *usuario@cade\.gov\.br* \n Seu login será: usuario"
-
-logging.basicConfig(level=logging.INFO,
-                    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-logger = logging.getLogger()
 
 ORGAO, SENHA, TITULO, CARGO, DDD, TELEFONE, LOGIN, IMAGEM = range(8) 
 EMAIL_SIGNATURE_PARAMS = {}
