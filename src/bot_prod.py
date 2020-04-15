@@ -169,9 +169,9 @@ def main():
     dp.add_handler(conv_handler)
     dp.add_error_handler(error)
 
-    updater.start_webhook(listen="0.0.0.0", url_path=TELEGRAM_TOKEN)
+    updater.start_webhook(listen="0.0.0.0", port=8443, url_path=TELEGRAM_TOKEN)
     updater.bot.set_webhook("https://{}.herokuapp.com/{}".format(HEROKU_APP_NAME, TELEGRAM_TOKEN))
-
+    updater.idle()
 
 if __name__ == '__main__':
     main()
