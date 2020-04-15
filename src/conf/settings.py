@@ -5,8 +5,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME")
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
-PASSWORD = os.getenv("PASSWORD")
+TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
+PASSWORD = os.environ.get("PASSWORD")
 MSG_START = os.getenv("MSG_START")
 MSG_ORGAO = os.getenv("MSG_ORGAO")
 MSG_SENHA = os.getenv("MSG_SENHA")
