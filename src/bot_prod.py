@@ -174,5 +174,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print("press CTRL + C to cancel.")
     main()
