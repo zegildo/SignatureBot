@@ -15,8 +15,9 @@ import signature_builder as sb
 
 
 
-logging.basicConfig(filename='../log/log.log',level=logging.INFO)
-logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO,
+                    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+logger = logging.getLogger()
 
 ORGAO, SENHA, TITULO, CARGO, DDD, TELEFONE, LOGIN, IMAGEM = range(8) 
 EMAIL_SIGNATURE_PARAMS = {}
