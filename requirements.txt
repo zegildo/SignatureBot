@@ -35,7 +35,6 @@ PyHamcrest==2.0.2
 PyJWT==1.5.3
 pyOpenSSL==17.5.0
 pyserial==3.4
-python-apt==1.6.5+ubuntu0.2
 python-debian==0.1.32
 python-dotenv==0.12.0
 python-telegram-bot==12.5.1
