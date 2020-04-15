@@ -8,7 +8,7 @@ from telegram import (ParseMode, ReplyKeyboardMarkup, ReplyKeyboardRemove)
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters,
                           ConversationHandler)
 
-from conf.settings import (TELEGRAM_TOKEN, PASSWORD, MSG_START, MSG_ORGAO,
+from conf.settings import (HEROKU_APP_NAME, TELEGRAM_TOKEN, PASSWORD, MSG_START, MSG_ORGAO,
                         MSG_SENHA,  MSG_SENHA_NOK, MSG_TITULO, MSG_CARGO, MSG_DDD, 
                         MSG_TEL, MSG_LOG)
 import signature_builder as sb
@@ -169,9 +169,7 @@ def main():
     dp.add_handler(conv_handler)
     dp.add_error_handler(error)
 
-    PORT = int(os.environ.get("PORT", "8443"))
-    HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME")
-    updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=TELEGRAM_TOKEN)
+    updater.start_webhook(listen="0.0.0.0", url_path=TELEGRAM_TOKEN)
     updater.bot.set_webhook("https://{}.herokuapp.com/{}".format(HEROKU_APP_NAME, TELEGRAM_TOKEN))
 
 
