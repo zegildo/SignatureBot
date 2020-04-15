@@ -46,3 +46,5 @@ INFO:__main__:User Zé: Economista
 INFO:__main__:User Zé: 83
 INFO:__main__:User Zé: 98721446
 INFO:__main__:User Zé: Analuiza
+INFO:telegram.ext.updater:Received signal 2 (SIGINT), stopping...
+WARNING:telegram.ext.updater:Exiting immediately!
