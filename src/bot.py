@@ -15,13 +15,15 @@ import signature_builder as sb
 
 
 
-logging.basicConfig(filename='log.log',level=logging.INFO)
+logging.basicConfig(filename='../log/log.log',level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 ORGAO, SENHA, TITULO, CARGO, DDD, TELEFONE, LOGIN, IMAGEM = range(8) 
 EMAIL_SIGNATURE_PARAMS = {}
 
 def start(update, context):
+    """
+    """
     reply_keyboard = [['CADE', 'UFERSA']]
 
     update.message.reply_text(MSG_START,
@@ -30,15 +32,17 @@ def start(update, context):
     return ORGAO
 
 def orgao(update, context):
+    """
+    """
     user = update.message.from_user
     logger.info("User %s: %s", user.first_name, update.message.text)
     EMAIL_SIGNATURE_PARAMS['ORGAO'] = update.message.text
-    update.message.reply_text(MSG_ORGAO,
-                              reply_markup=ReplyKeyboardRemove(),
-                              parse_mode=ParseMode.MARKDOWN_V2)
+    update.message.reply_text(MSG_ORGAO, parse_mode=ParseMode.MARKDOWN_V2)
     return SENHA
 
 def senha(update, context):
+    """
+    """
     user = update.message.from_user
     senha = update.message.text
                        
@@ -53,20 +57,35 @@ def senha(update, context):
     return TITULO
 
 def titulo(update, context):
+    """
+    """
     user = update.message.from_user
     EMAIL_SIGNATURE_PARAMS['NOME'] = update.message.text
     logger.info("User %s: %s", user.first_name, update.message.text)
-    update.message.reply_text(MSG_TITULO)
+    
+
+    reply_keyboard = [['BSc.', 'Esp.', 'MBA.', 'MsC.','Ph.D.']]
+    update.message.reply_text(MSG_TITULO,
+            reply_markup=ReplyKeyboardMarkup(reply_keyboard, 
+            resize_keyboard=True,
+            one_time_keyboard=True))
+
     return CARGO
 
 def cargo(update, context):
+    """
+    """
     user = update.message.from_user
     logger.info("User %s: %s", user.first_name, update.message.text)
     EMAIL_SIGNATURE_PARAMS['TITULO'] = update.message.text
+
+    reply_keyboard = [['BSc.', 'Esp.', 'MBA.', 'MsC.','Ph.D.']]
     update.message.reply_text(MSG_CARGO)
     return DDD
 
 def DDD(update, context):
+    """
+    """
     user = update.message.from_user
     logger.info("User %s: %s", user.first_name, update.message.text)
     EMAIL_SIGNATURE_PARAMS['CARGO'] = update.message.text
@@ -74,6 +93,8 @@ def DDD(update, context):
     return TELEFONE
 
 def telefone(update, context):
+    """
+    """
     user = update.message.from_user
     EMAIL_SIGNATURE_PARAMS['DDD'] = update.message.text
     logger.info("User %s: %s", user.first_name, update.message.text)
@@ -81,6 +102,8 @@ def telefone(update, context):
     return LOGIN
 
 def login(update, context):
+    """
+    """
     user = update.message.from_user
     EMAIL_SIGNATURE_PARAMS['TELEFONE'] = update.message.text
     logger.info("User %s: %s", user.first_name, update.message.text)
@@ -89,6 +112,8 @@ def login(update, context):
     return IMAGEM
 
 def imagem(update, context):
+    """
+    """
     user = update.message.from_user
     EMAIL_SIGNATURE_PARAMS['LOGIN'] = update.message.text
     logger.info("User %s: %s", user.first_name, update.message.text)
@@ -101,6 +126,8 @@ def imagem(update, context):
 
 
 def cancel(update, context):
+    """
+    """
     user = update.message.from_user
     logger.info("User %s canceled the conversation.", user.first_name)
     update.message.reply_text('Este serviço não existe!',
@@ -109,6 +136,8 @@ def cancel(update, context):
     return ConversationHandler.END
 
 def error(update, context):
+    """
+    """
     logger.warning('Update "%s" erro "%s"', update, context.error)
 
 
@@ -123,7 +152,7 @@ def main():
         states = {
             ORGAO: [MessageHandler(Filters.regex('^(CADE|UFERSA)$'), orgao)],
 
-            SENHA: [MessageHandler(Filters.text, senha)] ,
+            SENHA: [MessageHandler(Filters.text, senha)],
 
             TITULO: [MessageHandler(Filters.text, titulo)],
             
