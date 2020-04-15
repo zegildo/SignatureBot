@@ -7,7 +7,7 @@ import os
 HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME")
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
 PASSWORD = os.environ.get("PASSWORD")
-PORT = os.environ.get("PASSWORD")
+PORT = os.environ.get("PORT")
 #MSG_START = os.getenv("MSG_START")
 #MSG_ORGAO = os.getenv("MSG_ORGAO")
 #MSG_SENHA = os.getenv("MSG_SENHA")
