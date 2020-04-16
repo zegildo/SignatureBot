@@ -32,10 +32,10 @@ EMAIL_SIGNATURE_PARAMS = {}
 def start(update, context):
     """
     """
-    reply_keyboard = [['CADE'],
-                      ['UFERSA']]
+    reply_keyboard = [['CADE', 'UFERSA']]
     update.message.reply_text(MSG_START,
         reply_markup=ReplyKeyboardMarkup(reply_keyboard,
+        one_time_keyboard=True,
         resize_keyboard=True))
 
     return ORGAO
