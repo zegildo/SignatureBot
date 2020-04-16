@@ -33,8 +33,8 @@ def create_personal_information(kwargs):
 	email = get_email(kwargs['LOGIN'])
 
 	img = Image.new('RGB', (1800, 500), color = (255, 255, 255))
-	fnt_nome = ImageFont.truetype('../fonts/Effra_Std_Rg.ttf', 150)
-	fnt_inf = ImageFont.truetype('../fonts/roboto/Roboto-Regular.ttf', 80)
+	fnt_nome = ImageFont.truetype('fonts/Effra_Std_Rg.ttf', 150)
+	fnt_inf = ImageFont.truetype('fonts/roboto/Roboto-Regular.ttf', 80)
 
 	d = ImageDraw.Draw(img)
 	
@@ -47,7 +47,7 @@ def create_personal_information(kwargs):
 def create_logo():
 	'''
 	'''
-	logo = Image.open("../logos/cade/cade-1300-415.png")
+	logo = Image.open("logos/cade/cade-1300-415.png")
 	return logo
 
 def get_file_name(nome):
