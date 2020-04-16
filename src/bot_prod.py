@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.INFO,
                     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger()
 
-MSG_START="Olá! Eu sou um construtor de assinaturas de e-mails.\nA qual órgão você pertence?"
+MSG_START="Olá! Eu sou um construtor de assinaturas de e-mails. A qual órgão você pertence?"
 MSG_ORGAO="*ATENÇÃO\!* \nEste serviço é de uso exclusivo de servidores\. DIGITE A SENHA DE UTILIZAÇÃO PARA CONTINUAR:"
 MSG_ORGAO_NOK="Infelizmente ainda não desenvolvemos a assinatura de e-mail para esse órgão.\nAté logo!"
 MSG_SENHA="*Seja Bem\-Vindo\!* \nA partir de agora vamos gerar sua assinatura de e\-mail personalizada\. \nDigite por favor o seu NOME e SOBRENOME:"
