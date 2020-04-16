@@ -19,6 +19,12 @@ logging.basicConfig(level=logging.INFO,
                     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger()
 
+TELEFONE_NUMBERS_MATRIX = [
+                          ['1', '2', '3'],
+                          ['4', '5', '6'],
+                          ['7', '8', '9'],
+                          ['', '0', '']
+                          ]
 
 ORGAO, SENHA, TITULO, CARGO, DDD, TELEFONE, LOGIN, IMAGEM = range(8) 
 EMAIL_SIGNATURE_PARAMS = {}
@@ -102,7 +108,12 @@ def DDD(update, context):
     user = update.message.from_user
     logger.info("User %s: %s", user.first_name, update.message.text)
     EMAIL_SIGNATURE_PARAMS['CARGO'] = update.message.text
-    update.message.reply_text(MSG_DDD, parse_mode=ParseMode.MARKDOWN_V2)
+
+    update.message.reply_text(MSG_DDD, 
+        parse_mode=ParseMode.MARKDOWN_V2,
+        reply_markup=ReplyKeyboardMarkup(TELEFONE_NUMBERS_MATRIX, 
+        resize_keyboard=True))
+
     return TELEFONE
 
 def telefone(update, context):
@@ -111,15 +122,9 @@ def telefone(update, context):
     user = update.message.from_user
     EMAIL_SIGNATURE_PARAMS['DDD'] = update.message.text
 
-    reply_keyboard = [
-                     ['1', '2', '3'],
-                     ['4', '5', '6'],
-                     ['7', '8', '9'],
-                     ['', '0', '']
-                     ]
     logger.info("User %s: %s", user.first_name, update.message.text)
     update.message.reply_text(MSG_TEL, 
-        reply_markup=ReplyKeyboardMarkup(reply_keyboard, 
+        reply_markup=ReplyKeyboardMarkup(TELEFONE_NUMBERS_MATRIX, 
         resize_keyboard=True))
     
     return LOGIN
@@ -133,7 +138,7 @@ def login(update, context):
     update.message.reply_text(MSG_LOG,
         reply_markup=ReplyKeyboardRemove(),
         parse_mode=ParseMode.MARKDOWN_V2)
-    
+
     return IMAGEM
 
 def imagem(update, context):
@@ -143,7 +148,6 @@ def imagem(update, context):
     EMAIL_SIGNATURE_PARAMS['LOGIN'] = update.message.text
     logger.info("User %s: %s", user.first_name, update.message.text)
 
-    
     img = sb.create(EMAIL_SIGNATURE_PARAMS)
     context.bot.send_photo(user.id, photo=img)
 
