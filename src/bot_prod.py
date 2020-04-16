@@ -32,6 +32,7 @@ def start(update, context):
     """
     """
     reply_keyboard = [['CADE', 'UFERSA']]
+    logger.info("User %s: %s", user.first_name, update.message.text)
 
     update.message.reply_text(MSG_START,
         reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
