@@ -9,22 +9,16 @@ from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters,
                           ConversationHandler)
 
 from conf.settings import (HEROKU_APP_NAME, PORT, TELEGRAM_TOKEN, PASSWORD)
+from conf.messages_pt import (MSG_START, MSG_ORGAO, MSG_ORGAO_NOK, MSG_SENHA,
+                              MSG_SENHA_NOK, MSG_TITULO, MSG_CARGO, MSG_DDD,
+                              MSG_TEL, MSG_LOG)
+
 import signature_builder as sb
 
 logging.basicConfig(level=logging.INFO,
                     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger()
 
-MSG_START="Olá! Eu sou um construtor de assinaturas de e-mails. A qual órgão você pertence?"
-MSG_ORGAO="*ATENÇÃO\!* \nEste serviço é de uso exclusivo de servidores\. DIGITE A SENHA DE UTILIZAÇÃO PARA CONTINUAR:"
-MSG_ORGAO_NOK="Infelizmente ainda não desenvolvemos a assinatura de e-mail para esse órgão.\nAté logo!"
-MSG_SENHA="*Seja Bem\-Vindo\!* \nA partir de agora vamos gerar sua assinatura de e\-mail personalizada\. \nDigite por favor o seu NOME e SOBRENOME:"
-MSG_SENHA_NOK="Senha incorreta. Você não possui autorização! Até logo!"
-MSG_TITULO="Qual o seu título acadêmico?"
-MSG_CARGO="Qual o seu cargo?"
-MSG_DDD="Qual o seu DDD?"
-MSG_TEL="Qual o seu telefone? Ex: 95683 3245"
-MSG_LOG="Qual o seu login de e\-mail? \n Ex: Se o seu e\-mail for: *usuario@cade\.gov\.br* \n Seu login será: usuario"
 
 ORGAO, SENHA, TITULO, CARGO, DDD, TELEFONE, LOGIN, IMAGEM = range(8) 
 EMAIL_SIGNATURE_PARAMS = {}
@@ -54,7 +48,8 @@ def orgao(update, context):
             parse_mode=ParseMode.MARKDOWN_V2)
         return SENHA
     else:
-        update.message.reply_text(MSG_ORGAO_NOK, reply_markup=ReplyKeyboardRemove())
+        update.message.reply_text(MSG_ORGAO_NOK, 
+            reply_markup=ReplyKeyboardRemove())
         return ConversationHandler.END
 
     
@@ -68,7 +63,8 @@ def senha(update, context):
         update.message.reply_text(MSG_SENHA_NOK)
         return ConversationHandler.END
     else:
-        update.message.reply_text(MSG_SENHA, parse_mode=ParseMode.MARKDOWN_V2)
+        update.message.reply_text(MSG_SENHA, 
+            parse_mode=ParseMode.MARKDOWN_V2)
     
     logger.info("User %s: senha: %s", user.first_name, update.message.text)
 
@@ -81,7 +77,6 @@ def titulo(update, context):
     EMAIL_SIGNATURE_PARAMS['NOME'] = update.message.text
     logger.info("User %s: %s", user.first_name, update.message.text)
     
-
     reply_keyboard = [['BSc.', 'Esp.', 'MBA.', 'MsC.','Ph.D.']]
     update.message.reply_text(MSG_TITULO,
             reply_markup=ReplyKeyboardMarkup(reply_keyboard, 
@@ -96,8 +91,9 @@ def cargo(update, context):
     logger.info("User %s: %s", user.first_name, update.message.text)
     EMAIL_SIGNATURE_PARAMS['TITULO'] = update.message.text
 
-    reply_keyboard = [['BSc.', 'Esp.', 'MBA.', 'MsC.','Ph.D.']]
-    update.message.reply_text(MSG_CARGO)
+    update.message.reply_text(MSG_CARGO, 
+        reply_markup=ReplyKeyboardRemove())
+    
     return DDD
 
 def DDD(update, context):
@@ -106,7 +102,7 @@ def DDD(update, context):
     user = update.message.from_user
     logger.info("User %s: %s", user.first_name, update.message.text)
     EMAIL_SIGNATURE_PARAMS['CARGO'] = update.message.text
-    update.message.reply_text(MSG_DDD, reply_markup=ReplyKeyboardRemove())
+    update.message.reply_text(MSG_DDD)
     return TELEFONE
 
 def telefone(update, context):

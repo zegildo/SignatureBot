@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# This program is dedicated to generate automatic e-mail signatures.
+
 import os
 
 #from dotenv import load_dotenv
