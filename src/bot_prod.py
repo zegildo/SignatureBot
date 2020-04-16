@@ -35,7 +35,6 @@ def start(update, context):
     reply_keyboard = [['CADE', 'UFERSA']]
     update.message.reply_text(MSG_START,
         reply_markup=ReplyKeyboardMarkup(reply_keyboard,
-        one_time_keyboard=True,
         resize_keyboard=True))
 
     return ORGAO
@@ -50,7 +49,9 @@ def orgao(update, context):
     orgao = orgao.upper()
     if orgao in ['UFERSA', 'CADE']:
         EMAIL_SIGNATURE_PARAMS['ORGAO'] = update.message.text
-        update.message.reply_text(MSG_ORGAO, parse_mode=ParseMode.MARKDOWN_V2)
+        update.message.reply_text(MSG_ORGAO, 
+            reply_markup=ReplyKeyboardRemove(),
+            parse_mode=ParseMode.MARKDOWN_V2)
         return SENHA
     else:
         update.message.reply_text(MSG_ORGAO_NOK)
@@ -84,8 +85,7 @@ def titulo(update, context):
     reply_keyboard = [['BSc.', 'Esp.', 'MBA.', 'MsC.','Ph.D.']]
     update.message.reply_text(MSG_TITULO,
             reply_markup=ReplyKeyboardMarkup(reply_keyboard, 
-            resize_keyboard=True,
-            one_time_keyboard=True))
+            resize_keyboard=True))
 
     return CARGO
 
@@ -106,7 +106,7 @@ def DDD(update, context):
     user = update.message.from_user
     logger.info("User %s: %s", user.first_name, update.message.text)
     EMAIL_SIGNATURE_PARAMS['CARGO'] = update.message.text
-    update.message.reply_text(MSG_DDD)
+    update.message.reply_text(MSG_DDD, reply_markup=ReplyKeyboardRemove())
     return TELEFONE
 
 def telefone(update, context):
