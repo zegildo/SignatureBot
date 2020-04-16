@@ -19,13 +19,6 @@ logging.basicConfig(level=logging.INFO,
                     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger()
 
-TELEFONE_NUMBERS_MATRIX = [
-                          ['1', '2', '3'],
-                          ['4', '5', '6'],
-                          ['7', '8', '9'],
-                          ['', '0', '']
-                          ]
-
 ORGAO, SENHA, TITULO, CARGO, DDD, TELEFONE, LOGIN, IMAGEM = range(8) 
 EMAIL_SIGNATURE_PARAMS = {}
 
@@ -109,10 +102,7 @@ def DDD(update, context):
     logger.info("User %s: %s", user.first_name, update.message.text)
     EMAIL_SIGNATURE_PARAMS['CARGO'] = update.message.text
 
-    update.message.reply_text(MSG_DDD, 
-        parse_mode=ParseMode.MARKDOWN_V2,
-        reply_markup=ReplyKeyboardMarkup(TELEFONE_NUMBERS_MATRIX, 
-        resize_keyboard=True))
+    update.message.reply_text(MSG_DDD, parse_mode=ParseMode.MARKDOWN_V2)
 
     return TELEFONE
 
@@ -123,9 +113,7 @@ def telefone(update, context):
     EMAIL_SIGNATURE_PARAMS['DDD'] = update.message.text
 
     logger.info("User %s: %s", user.first_name, update.message.text)
-    update.message.reply_text(MSG_TEL, 
-        reply_markup=ReplyKeyboardMarkup(TELEFONE_NUMBERS_MATRIX, 
-        resize_keyboard=True))
+    update.message.reply_text(MSG_TEL, parse_mode=ParseMode.MARKDOWN_V2)
     
     return LOGIN
 
