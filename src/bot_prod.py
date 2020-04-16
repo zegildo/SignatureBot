@@ -19,7 +19,7 @@ MSG_START="Olá! Eu sou um construtor de assinaturas de e-mails.\nA qual órgão
 MSG_ORGAO="*ATENÇÃO\!* \nEste serviço é de uso exclusivo de servidores\. DIGITE A SENHA DE UTILIZAÇÃO PARA CONTINUAR:"
 MSG_ORGAO_NOK="Infelizmente ainda não desenvolvemos a assinatura de e-mail para esse órgão.\nAté logo!"
 MSG_SENHA="*Seja Bem\-Vindo\!* \nA partir de agora vamos gerar sua assinatura de e\-mail personalizada\. \nDigite por favor o seu NOME e SOBRENOME:"
-MSG_SENHA_NOK="Senha incorreta. Você não possui autorização!"
+MSG_SENHA_NOK="Senha incorreta. Você não possui autorização! Até logo!"
 MSG_TITULO="Qual o seu título acadêmico?"
 MSG_CARGO="Qual o seu cargo?"
 MSG_DDD="Qual o seu DDD?"
@@ -36,8 +36,7 @@ def start(update, context):
                       ['UFERSA']]
     update.message.reply_text(MSG_START,
         reply_markup=ReplyKeyboardMarkup(reply_keyboard,
-        resize_keyboard=True,
-        one_time_keyboard=True))
+        resize_keyboard=True))
 
     return ORGAO
 
