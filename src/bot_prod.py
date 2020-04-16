@@ -54,7 +54,7 @@ def orgao(update, context):
             parse_mode=ParseMode.MARKDOWN_V2)
         return SENHA
     else:
-        update.message.reply_text(MSG_ORGAO_NOK)
+        update.message.reply_text(MSG_ORGAO_NOK, reply_markup=ReplyKeyboardRemove())
         return ConversationHandler.END
 
     
