@@ -93,7 +93,7 @@ def cargo(update, context):
 
     update.message.reply_text(MSG_CARGO, 
         reply_markup=ReplyKeyboardRemove())
-    
+
     return DDD
 
 def DDD(update, context):
@@ -102,7 +102,7 @@ def DDD(update, context):
     user = update.message.from_user
     logger.info("User %s: %s", user.first_name, update.message.text)
     EMAIL_SIGNATURE_PARAMS['CARGO'] = update.message.text
-    update.message.reply_text(MSG_DDD)
+    update.message.reply_text(MSG_DDD, parse_mode=ParseMode.MARKDOWN_V2)
     return TELEFONE
 
 def telefone(update, context):
@@ -110,8 +110,18 @@ def telefone(update, context):
     """
     user = update.message.from_user
     EMAIL_SIGNATURE_PARAMS['DDD'] = update.message.text
+
+    reply_keyboard = [
+                     ['1', '2', '3'],
+                     ['4', '5', '6'],
+                     ['7', '8', '9'],
+                     ['', '0', '']
+                     ]
     logger.info("User %s: %s", user.first_name, update.message.text)
-    update.message.reply_text(MSG_TEL)
+    update.message.reply_text(MSG_TEL, 
+        reply_markup=ReplyKeyboardMarkup(reply_keyboard, 
+        resize_keyboard=True))
+    
     return LOGIN
 
 def login(update, context):
@@ -121,7 +131,9 @@ def login(update, context):
     EMAIL_SIGNATURE_PARAMS['TELEFONE'] = update.message.text
     logger.info("User %s: %s", user.first_name, update.message.text)
     update.message.reply_text(MSG_LOG,
+        reply_markup=ReplyKeyboardRemove(),
         parse_mode=ParseMode.MARKDOWN_V2)
+    
     return IMAGEM
 
 def imagem(update, context):

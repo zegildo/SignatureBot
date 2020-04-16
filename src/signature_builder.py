@@ -11,7 +11,8 @@ def get_nome_titulo(nome, titulo):
 	return nome_e_titulo
 
 def get_telefone(DDD, tel):
-	telefone = tel.replace(' ','-')
+	QT_DIGITOS = 5
+	telefone = tel[:QT_DIGITOS] +'-'+tel[QT_DIGITOS:]
 	telefone_completo = '+55 '+DDD+' '+telefone
 	return telefone_completo
 
