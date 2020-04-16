@@ -18,7 +18,7 @@ logger = logging.getLogger()
 MSG_START="Olá! Eu sou um construtor de assinaturas de e-mails.\nA qual órgão você pertence?"
 MSG_ORGAO="*ATENÇÃO\!* \nEste serviço é de uso exclusivo de servidores\. DIGITE A SENHA DE UTILIZAÇÃO PARA CONTINUAR:"
 MSG_SENHA="*Seja Bem\-Vindo\!* \nA partir de agora vamos gerar sua assinatura de e\-mail personalizada\. \nDigite por favor o seu NOME e SOBRENOME:"
-MSG_SENHA_NOK="Você não está autorizado!"
+MSG_SENHA_NOK="Senha incorreta. Digite nova senha:"
 MSG_TITULO="Qual o seu título acadêmico?"
 MSG_CARGO="Qual o seu cargo?"
 MSG_DDD="Qual o seu DDD?"
@@ -53,12 +53,10 @@ def senha(update, context):
     user = update.message.from_user
     senha = update.message.text
                        
-    if senha != PASSWORD:
+    while (senha != PASSWORD):
         update.message.reply_text(MSG_SENHA_NOK)
-        return ConversationHandler.END
-    else:
-        update.message.reply_text(MSG_SENHA, parse_mode=ParseMode.MARKDOWN_V2)
     
+    update.message.reply_text(MSG_SENHA, parse_mode=ParseMode.MARKDOWN_V2)
     logger.info("User %s: senha: %s", user.first_name, update.message.text)
 
     return TITULO
