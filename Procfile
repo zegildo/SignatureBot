@@ -1,1 +1,1 @@
-web: python3 src/bot_prod.py
+web: python3 src/bot.py
