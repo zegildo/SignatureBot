@@ -9,7 +9,7 @@ click==6.7
 colorama==0.3.7
 configobj==5.0.6
 constantly==15.1.0
-cryptography==2.9
+cryptography==3.2
 decorator==4.4.2
 future==0.18.2
 httplib2==0.9.2
